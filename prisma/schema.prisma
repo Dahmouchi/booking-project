@@ -6,14 +6,87 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+model Property {
+  id          String        @id @default(cuid())
+  title       String
+  description String
+  type        PropertyType
+  pricePerNight Float
+  location    String
+  country     String
+  city        String
+  address     String
+  latitude    Float?
+  longitude   Float?
+  images      String[]      // Array of image URLs
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
+  // Relations
+  owner       User          @relation(fields: [ownerId], references: [id])
+  ownerId     String
+  bookings    Booking[]
+  reviews     Review[]
+}
+
+model Booking {
+  id           String       @id @default(cuid())
+  checkIn      DateTime
+  checkOut     DateTime
+  totalPrice   Float
+  status       BookingStatus @default(PENDING)
+  createdAt    DateTime      @default(now())
+
+  // Relations
+  guest        User         @relation(fields: [guestId], references: [id])
+  guestId      String
+  property     Property     @relation(fields: [propertyId], references: [id])
+  propertyId   String
+  payment      Payment?
+}
+
+model Payment {
+  id         String    @id @default(cuid())
+  amount     Float
+  method     String    // Example: "Credit Card", "PayPal"
+  status     String    // Example: "Paid", "Failed"
+  createdAt  DateTime  @default(now())
+
+  // Relations
+  booking    Booking   @relation(fields: [bookingId], references: [id])
+  bookingId  String @unique
+}
+
+model Review {
+  id         String    @id @default(cuid())
+  rating     Int       // 1 to 5
+  comment    String
+  createdAt  DateTime  @default(now())
+
+  // Relations
+  author     User      @relation(fields: [authorId], references: [id])
+  authorId   String
+  property   Property  @relation(fields: [propertyId], references: [id])
+  propertyId String
+}
+
+model Message {
+  id          String   @id @default(cuid())
+  content     String
+  createdAt   DateTime @default(now())
+
+  // Relations
+  sender      User     @relation("SentMessages", fields: [senderId], references: [id])
+  senderId    String
+  receiver    User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId  String
+}
 
 model User {
   id               String    @id @default(cuid())
@@ -30,7 +103,7 @@ model User {
   password         String?
   prenom           String?
   qrSecret         String?
-  role             Role      @default(USER)
+  role             Role      @default(GUEST)
   statut           Boolean   @default(true)
   StatutUser       StatutUser @default(awaiting)
   twoFactorEnabled Boolean   @default(true)
@@ -39,6 +112,12 @@ model User {
   username         String    @unique
   verified_email   String?
 
+// Relations
+  properties   Property[] // Host's properties
+  bookings     Booking[]  // Guest's bookings
+  reviews      Review[]   // Reviews from guest
+  sentMessages Message[]  @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
   accounts       Account[]
   Authenticator  Authenticator[]
   sessions       Session[]
@@ -95,11 +174,31 @@ model Authenticator {
 }
 
 enum Role {
-  USER
   ADMIN
+  HOST
+  GUEST
 }
 enum StatutUser {
   subscribed
   awaiting
   verified
+}
+enum UserRole {
+  ADMIN
+  HOST
+  GUEST
+}
+
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  VILLA
+  STUDIO
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
 }

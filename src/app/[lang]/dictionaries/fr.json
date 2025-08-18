@@ -1,0 +1,54 @@
+{
+  "products": {
+    "cart": "ajouter au panier"
+  },
+  "header": {
+    "home": "Accueil",
+    "browse": "Parcourir",
+    "host": "Devenir hôte",
+    "contact": "Contact",
+    "login": "Connexion"
+  },
+   "hero": {
+    "title": "Trouvez votre",
+    "highlight": "refuge parfait",
+    "subtitle": "Découvrez des logements uniques et vivez des expériences inoubliables partout dans le monde",
+    "destination": "Destination",
+    "placeholderDestination": "Où allez-vous ?",
+    "arrival": "Arrivée",
+    "departure": "Départ",
+    "guests": "Voyageurs",
+    "placeholderGuests": "Combien ?",
+    "search": "Rechercher"
+  },
+   "howItWorks": {
+    "title": "Comment ça marche",
+    "subtitle": "Réservez votre séjour parfait en quelques étapes simples",
+    "steps": [
+      { "title": "Recherchez", "description": "Explorez des milliers de logements uniques dans le monde entier. Filtrez par prix, équipements et localisation pour trouver votre séjour idéal." },
+      { "title": "Réservez", "description": "Réservez instantanément ou contactez l'hôte. Profitez de notre système de paiement sécurisé et de notre protection complète." },
+      { "title": "Profitez", "description": "Vivez des expériences authentiques et créez des souvenirs inoubliables dans votre nouveau chez-vous temporaire." },
+      { "title": "Soyez protégé", "description": "Bénéficiez de notre garantie hôte et de notre support client 24h/24 pour un séjour en toute sérénité." }
+    ],
+    "cta": "Simple, rapide et sécurisé"
+  },
+  "hostCTA": {
+    "headerLabel": "Devenez hôte",
+    "title": "Transformez votre espace en\nsource de revenus",
+    "description": "Partagez votre logement avec des voyageurs du monde entier et générez des revenus complémentaires en toute sécurité.",
+    "benefits": [
+      { "title": "Revenus attractifs", "description": "Gagnez jusqu'à 500€ par mois en louant votre logement" },
+      { "title": "Protection garantie", "description": "Assurance complète et vérification des voyageurs" },
+      { "title": "Communauté bienveillante", "description": "Rejoignez des milliers d'hôtes satisfaits" }
+    ],
+    "ctaPrimary": "Devenir hôte",
+    "ctaSecondary": "En savoir plus",
+    "stats": [
+      { "value": "€450", "label": "Revenus moyens/mois" },
+      { "value": "4.8★", "label": "Note moyenne hôtes" },
+      { "value": "10K+", "label": "Hôtes actifs" },
+      { "value": "95%", "label": "Taux de satisfaction" },
+      { "value": "€2M+", "label": "Revenus générés" }
+    ]
+  }
+}

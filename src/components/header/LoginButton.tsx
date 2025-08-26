@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
@@ -25,6 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useRouter } from "next/navigation";
 
 function GoogleIcon() {
   return (
@@ -56,7 +58,7 @@ export default function AuthDialogButton() {
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
   const { data: session, update } = useSession();
-
+  const router = useRouter();
   const signInWithGoogle = (mode: string) => {
     signIn("google");
     setOpen(false);
@@ -99,8 +101,21 @@ export default function AuthDialogButton() {
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem>Centre aide</DropdownMenuItem>
-
+         
           {session ? (
+             <>
+            <DropdownMenuItem
+  onClick={() =>
+    session?.user?.role === "HOST"
+      ? router.push("/host/dashboard")
+      : router.push("/host/login")
+  }
+>
+  <div className="flex items-center gap-2 w-full border-y border-gray-300 py-2">
+    <img src="/images/apartment.png" alt="" className="w-8 h-8" />
+    <h1>Devenir hôte</h1>
+  </div>
+</DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => signOut({ callbackUrl: "/" })}
               className="cursor-pointer"
@@ -108,9 +123,9 @@ export default function AuthDialogButton() {
               <LogOut />
               Se déconnecter
             </DropdownMenuItem>
+            </>
           ) : (
             <>
-              <DropdownMenuItem>Devenir hôte</DropdownMenuItem>
               <DropdownMenuItem onClick={() => setOpen(true)}>
                 Se connecter
               </DropdownMenuItem>

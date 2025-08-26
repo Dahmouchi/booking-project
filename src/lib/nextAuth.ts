@@ -53,46 +53,47 @@ export const authOptions: NextAuthOptions = {
     }),
 
     // Username-Only Authentication
-    CredentialsProvider({
-      name: "Username Only",
-      id: "username-only",
-      credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
-        code: { label: "2FA Code", type: "text", optional: true }, // 2FA Code field
-      },
-      async authorize(credentials) {
-        if (!credentials?.username || !credentials?.password) {
-          throw new Error("Username or password is required");
-        }
+   CredentialsProvider({
+  name: "Username Only",
+  id: "username-only",
+  credentials: {
+    username: { label: "Username", type: "text" },
+    password: { label: "Password", type: "password" },
+    code: { label: "2FA Code", type: "text", optional: true },
+  },
+  async authorize(credentials) {
+    if (!credentials?.username || !credentials?.password) {
+      throw new Error("Username and password are required");
+    }
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.username },
-        });
+    const user = await prisma.user.findUnique({
+      where: { username: credentials.username }, // ✅ fixed
+    });
 
-        if (!user || !user.password) {
-          throw new Error("Invalid credentials");
-        }
+    if (!user || !user.password) {
+      throw new Error("Invalid credentials");
+    }
 
-        const isValid = await compare(credentials.password, user.password);
+    const isValid = await compare(credentials.password, user.password);
+    if (!isValid) {
+      throw new Error("Incorrect password");
+    }
 
-        if (!isValid) {
-          throw new Error("The password is incorrect");
-        }
+    // If 2FA is enabled you could verify credentials.code here
+    const twoFactorVerified = false;
 
-        // If 2FA is enabled, verify the code
-        const twoFactorVerified = false;
-        return {
-          id: user.id,
-          step: user.step,
-          username: user.username,
-          role: user.role,
-          twoFactorEnabled: user.twoFactorEnabled,
-          twoFactorVerified, // Now it reflects the verification status
-          statut: user.statut,
-        };
-      },
-    }),
+    return {
+      id: user.id,
+      step: user.step,
+      username: user.username,
+      role: user.role,
+      twoFactorEnabled: user.twoFactorEnabled,
+      twoFactorVerified,
+      statut: user.statut,
+    };
+  },
+}),
+
   ],
   session: {
     strategy: "jwt",
@@ -154,8 +155,13 @@ export const authOptions: NextAuthOptions = {
         token.statut = user.statut;
       }
       if (trigger === "update") {
-        token.step = session.step;
-      }
+    // Merge the update payload into the token
+    if (session?.role) token.role = session.role;
+    if (session?.step) token.step = session.step;
+    if (session?.statut) token.statut = session.statut;
+    if (session?.username) token.username = session.username;
+  }
+
       return token;
     },
 

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
@@ -8,6 +9,7 @@ import AuthDialogButton from '../header/LoginButton';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import { LanguageSelector } from '../LangSwitcher';
+import { motion, AnimatePresence } from 'framer-motion'; // Import motion and AnimatePresence
 
 type HeaderProps = {
   data: {
@@ -22,6 +24,7 @@ type HeaderProps = {
 
 export default function Header({ data, currentLang }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false); // New state for scroll animation
   const { data: session } = useSession();
   const pathname = usePathname();
   const router = useRouter();
@@ -34,6 +37,23 @@ export default function Header({ data, currentLang }: HeaderProps) {
     }
   }, [session]);
 
+  // Scroll effect for header background
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) { // Trigger after 50px scroll
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const changeLang = (lang: string) => {
     // remove current lang prefix from path
     const segments = pathname.split('/');
@@ -43,53 +63,110 @@ export default function Header({ data, currentLang }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <motion.header
+      initial={false}
+      animate={scrolled ? 'scrolled' : 'top'}
+      variants={{
+        top: { backgroundColor: 'rgba(255, 255, 255, 0.8)', boxShadow: 'none', backdropFilter: 'blur(0px)' },
+        scrolled: { backgroundColor: 'rgba(255, 255, 255, 0.95)', boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', backdropFilter: 'blur(8px)' }
+      }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className="sticky top-0 z-50"
+    >
+      <div className=" mx-auto px-4 sm:px-6 lg:px-16 py-2">
+        <div className="flex justify-between items-center">
           {/* Logo */}
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-[#FFA03F]">StayNest</h1>
-            </div>
-          </div>
+          <motion.div
+            className="flex items-center"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <img src="/images/logo.png" alt="" className="w-36 h-auto" />
+          </motion.div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="flex items-center space-x-1 text-slate-700 hover:text-[#FFA03F] transition-colors">
+            {/* Home Link */}
+            <motion.a
+              href="#home"
+              className="flex items-center space-x-1 text-slate-700 hover:text-[#ff914d] transition-colors relative overflow-hidden group"
+              whileHover="hover"
+              whileTap="tap"
+              variants={{
+                hover: { y: -2 },
+                tap: { scale: 0.95 }
+              }}
+            >
               <Home size={18} />
               <span>{data.home}</span>
-            </a>
-            <a href="#browse" className="flex items-center space-x-1 text-slate-700 hover:text-[#FFA03F] transition-colors">
-              <Search size={18} />
-              <span>{data.browse}</span>
-            </a>
-            <a href="#host" className="flex items-center space-x-1 text-slate-700 hover:text-[#FFA03F] transition-colors">
+              <motion.span
+                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ff914d]"
+                initial={{ scaleX: 0 }}
+                variants={{
+                  hover: { scaleX: 1 },
+                  tap: { scaleX: 0 }
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              />
+            </motion.a>
+            {/* Host Link */}
+            <motion.a
+              href="#host"
+              className="flex items-center space-x-1 text-slate-700 hover:text-[#ff914d] transition-colors relative overflow-hidden group"
+              whileHover="hover"
+              whileTap="tap"
+              variants={{
+                hover: { y: -2 },
+                tap: { scale: 0.95 }
+              }}
+            >
               <UserPlus size={18} />
               <span>{data.host}</span>
-            </a>
-            <a href="#contact" className="flex items-center space-x-1 text-slate-700 hover:text-[#FFA03F] transition-colors">
+              <motion.span
+                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ff914d]"
+                initial={{ scaleX: 0 }}
+                variants={{
+                  hover: { scaleX: 1 },
+                  tap: { scaleX: 0 }
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              />
+            </motion.a>
+            {/* Contact Link */}
+            <motion.a
+              href="#contact"
+              className="flex items-center space-x-1 text-slate-700 hover:text-[#ff914d] transition-colors relative overflow-hidden group"
+              whileHover="hover"
+              whileTap="tap"
+              variants={{
+                hover: { y: -2 },
+                tap: { scale: 0.95 }
+              }}
+            >
               <Phone size={18} />
               <span>{data.contact}</span>
-            </a>
+              <motion.span
+                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ff914d]"
+                initial={{ scaleX: 0 }}
+                variants={{
+                  hover: { scaleX: 1 },
+                  tap: { scaleX: 0 }
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              />
+            </motion.a>
           </nav>
 
           {/* Right side: Auth + Lang Switch */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="flex items-center space-x-4">
              <LanguageSelector />
             <AuthDialogButton />
-
-            {/* Language Switcher */}
-           
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="sm" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
           </div>
         </div>
       </div>
-    </header>
+
+      
+    </motion.header>
   );
 }

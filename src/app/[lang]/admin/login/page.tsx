@@ -28,7 +28,7 @@ const session = await getServerSession(authOptions);
   <div className="absolute top-0 left-0 w-full h-full bg-black/40 z-10"></div>
 
   {/* Login Box */}
-  <div className="relative z-20 rounded-xl bg-white/40 border-2 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-sm max-sm:px-8">
+  <div className="relative z-20 rounded-xl bg-white/40 border-2 bg-opacity-50 px-16 pb-10 shadow-lg backdrop-blur-sm max-sm:px-8">
     <div className="text-white">
       <LoginForm />
     </div>

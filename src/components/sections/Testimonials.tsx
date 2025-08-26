@@ -4,6 +4,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar } from '@/components/ui/avatar';
 import { Star, Quote } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const testimonials = [
   {
@@ -11,7 +12,7 @@ const testimonials = [
     name: 'Marie Dubois',
     location: 'Paris, France',
     rating: 5,
-    comment: 'Une expérience exceptionnelle ! L\'appartement était exactement comme sur les photos, propre et bien situé. L\'hôte était très accueillant et disponible. Je recommande vivement !',
+    comment: 'Une expérience exceptionnelle ! L\'appartement était exactement comme sur les photos, propre et bien situé. Je recommande vivement !',
     avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80',
     property: 'Villa moderne avec vue sur mer'
   },
@@ -61,94 +62,119 @@ const testimonials = [
     property: 'Appartement cosy centre-ville'
   }
 ];
-
-export default function Testimonials() {
+interface Testimo {
+  data: {
+    title: string;
+    subtitle: string;
+    stats: {
+      value: string;
+      label: string;
+    }[];
+  };
+}
+export default function Testimonials({ data }: Testimo) {
   return (
-    <section className="py-16 md:py-24 bg-white">
+     <section className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
-            Ce que disent nos voyageurs
+            {data.title}
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Des milliers de voyageurs nous font confiance pour leurs séjours
+            {data.subtitle}
           </p>
-        </div>
+        </motion.div>
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
-            <Card 
-              key={testimonial.id} 
-              className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-white to-slate-50"
+          {testimonials.map((testimonial, idx) => (
+            <motion.div
+              key={testimonial.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: idx * 0.15 }}
+              whileHover={{ scale: 1.03, y: -5 }}
+              viewport={{ once: true }}
             >
-              <CardContent className="p-8">
-                {/* Quote Icon */}
-                <div className="mb-4">
-                  <Quote className="h-8 w-8 text-[#FFA03F] opacity-50" />
-                </div>
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-slate-50">
+                <CardContent className="p-8">
+                  {/* Quote Icon */}
+                  <div className="mb-4">
+                    <Quote className="h-8 w-8 text-[#ff914d] opacity-50" />
+                  </div>
 
-                {/* Rating */}
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, index) => (
-                    <Star 
-                      key={index} 
-                      className="h-5 w-5 fill-yellow-400 text-yellow-400" 
-                    />
-                  ))}
-                </div>
+                  {/* Rating */}
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, index) => (
+                      <Star
+                        key={index}
+                        className="h-5 w-5 fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
+                  </div>
 
-                {/* Comment */}
-                <p className="text-slate-700 mb-6 leading-relaxed">
-                  &quot;{testimonial.comment}&quot;
-                </p>
+                  {/* Comment */}
+                  <p className="text-slate-700 mb-6 leading-relaxed">
+                    &quot;{testimonial.comment}&quot;
+                  </p>
 
-                {/* User Info */}
-                <div className="flex items-center space-x-4">
-                  <Avatar className="h-12 w-12">
-                    <img 
-                      src={testimonial.avatar} 
-                      alt={testimonial.name}
-                      className="h-full w-full object-cover"
-                    />
-                  </Avatar>
-                  <div>
-                    <div className="font-semibold text-slate-800">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-sm text-slate-600">
-                      {testimonial.location}
-                    </div>
-                    <div className="text-xs text-[#FFA03F] font-medium">
-                      {testimonial.property}
+                  {/* User Info */}
+                  <div className="flex items-center space-x-4">
+                    <Avatar className="h-12 w-12">
+                      <img
+                        src={testimonial.avatar}
+                        alt={testimonial.name}
+                        className="h-full w-full object-cover rounded-full"
+                      />
+                    </Avatar>
+                    <div>
+                      <div className="font-semibold text-slate-800">
+                        {testimonial.name}
+                      </div>
+                      <div className="text-sm text-slate-600">
+                        {testimonial.location}
+                      </div>
+                      <div className="text-xs text-[#ff914d] font-medium">
+                        {testimonial.property}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
         {/* Stats */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <div className="text-3xl font-bold text-[#FFA03F]">4.9</div>
-            <div className="text-slate-600">Note moyenne</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-[#FFA03F]">98%</div>
-            <div className="text-slate-600">Clients satisfaits</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-[#FFA03F]">50K+</div>
-            <div className="text-slate-600">Avis positifs</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-[#FFA03F]">24/7</div>
-            <div className="text-slate-600">Support client</div>
-          </div>
-        </div>
+        <motion.div
+          className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          {data.stats.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="text-3xl font-bold text-[#ff914d]">
+                {item.value}
+              </div>
+              <div className="text-slate-600">{item.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

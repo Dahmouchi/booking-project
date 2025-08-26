@@ -26,10 +26,10 @@
     "title": "How It Works",
     "subtitle": "Book your perfect stay in a few simple steps",
     "steps": [
-      { "title": "Search", "description": "Explore thousands of unique stays worldwide. Filter by price, amenities, and location to find your ideal stay." },
-      { "title": "Book", "description": "Instantly book or contact the host. Enjoy our secure payment system and full protection." },
-      { "title": "Enjoy", "description": "Experience authentic stays and create unforgettable memories in your temporary home." },
-      { "title": "Stay Protected", "description": "Benefit from host guarantee and 24/7 customer support for a worry-free stay." }
+      { "title": "Search", "description": "Explore thousands of unique stays worldwide. Filter by price, amenities, and location to find your ideal stay.", "img":"https://images.pexels.com/photos/261388/pexels-photo-261388.jpeg" },
+      { "title": "Book", "description": "Instantly book or contact the host. Enjoy our secure payment system and full protection." ,"img":"https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg" },
+      { "title": "Enjoy", "description": "Experience authentic stays and create unforgettable memories in your temporary home.", "img":"https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg" },
+      { "title": "Stay Protected", "description": "Benefit from host guarantee and 24/7 customer support for a worry-free stay.", "img":"https://images.pexels.com/photos/1838554/pexels-photo-1838554.jpeg" }
     ],
     "cta": "Simple, fast, and secure"
   },
@@ -50,6 +50,48 @@
       { "value": "10K+", "label": "Active hosts" },
       { "value": "95%", "label": "Satisfaction rate" },
       { "value": "€2M+", "label": "Revenue generated" }
+    ]
+  },
+  "footer": {
+    "brandTitle": "StayNest",
+    "brandDesc": "Your trusted platform for authentic stays and unforgettable experiences around the world.",
+    "company": {
+      "title": "Company",
+      "links": ["About", "Careers", "Press", "Blog"]
+    },
+    "support": {
+      "title": "Support",
+      "links": ["Help Center", "Contact", "Security", "Status"]
+    },
+    "hosting": {
+      "title": "Hosting",
+      "links": ["Become a Host", "Host Guide", "Host Insurance", "Resources"]
+    },
+    "legal": {
+      "title": "Legal",
+      "links": ["Terms of Service", "Privacy Policy", "Cookies", "Legal Notice"]
+    },
+    "newsletter": {
+      "title": "Stay Informed",
+      "desc": "Get our latest offers and news straight to your inbox.",
+      "placeholder": "Your email address",
+      "subscribe": "Subscribe"
+    },
+    "rights": "© 2024 StayNest. All rights reserved."
+  },
+  "featuredProperties": {
+    "title": "Featured Properties",
+    "subtitle": "Discover a selection of our most highly rated accommodations",
+    "button": "View more properties"
+  },
+  "testimonials": {
+    "title": "What our travelers say",
+    "subtitle": "Thousands of travelers trust us for their stays",
+    "stats": [
+      { "value": "4.9", "label": "Average rating" },
+      { "value": "98%", "label": "Satisfied clients" },
+      { "value": "50K+", "label": "Positive reviews" },
+      { "value": "24/7", "label": "Customer support" }
     ]
   }
 }

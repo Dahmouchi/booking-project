@@ -43,7 +43,7 @@ const red = ()=>{
       <div className="min-h-screen flex flex-col items-center justify-center bg-cover bg-no-repeat bg-bottom p-4"
        style={{
         backgroundImage:
-          'url("https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg")',
+          'url("https://images.pexels.com/photos/439227/pexels-photo-439227.jpeg")',
       }}>
         <div className="w-full max-w-md bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
           {/* Header */}

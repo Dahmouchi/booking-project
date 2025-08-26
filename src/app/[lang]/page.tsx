@@ -20,10 +20,10 @@ export default async function Page({
       <Header data={dict.header} currentLang={lang} />
       <Hero data={dict.hero}/>
       <HowItWorks data={dict.howItWorks}/>
-      <FeaturedProperties />
-      <Testimonials />
+      <FeaturedProperties data={dict.featuredProperties} />
+      <Testimonials data={dict.testimonials}/>
       <HostCTA data={dict.hostCTA}/>
-      <Footer />
+      <Footer data={dict.footer}/>
     </main>
   );
 }

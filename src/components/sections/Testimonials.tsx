@@ -107,7 +107,7 @@ export default function Testimonials({ data }: Testimo) {
                 <CardContent className="p-8">
                   {/* Quote Icon */}
                   <div className="mb-4">
-                    <Quote className="h-8 w-8 text-[#ff914d] opacity-50" />
+                    <Quote className="h-8 w-8 text-[#b91d00] opacity-50" />
                   </div>
 
                   {/* Rating */}
@@ -141,7 +141,7 @@ export default function Testimonials({ data }: Testimo) {
                       <div className="text-sm text-slate-600">
                         {testimonial.location}
                       </div>
-                      <div className="text-xs text-[#ff914d] font-medium">
+                      <div className="text-xs text-[#b91d00] font-medium">
                         {testimonial.property}
                       </div>
                     </div>
@@ -168,7 +168,7 @@ export default function Testimonials({ data }: Testimo) {
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
             >
-              <div className="text-3xl font-bold text-[#ff914d]">
+              <div className="text-3xl font-bold text-[#b91d00]">
                 {item.value}
               </div>
               <div className="text-slate-600">{item.label}</div>

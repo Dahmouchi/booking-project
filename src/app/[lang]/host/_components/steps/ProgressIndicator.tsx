@@ -26,7 +26,7 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
           transition={{ duration: 0.3 }}
           className="text-sm font-medium text-gray-700"
         >
-          Étape <span className="font-semibold text-[#ff914d]">{currentStep}</span>{" "}
+          Étape <span className="font-semibold text-[#b91d00]">{currentStep}</span>{" "}
           sur {REGISTRATION_STEPS.length}
         </motion.div>
 
@@ -49,7 +49,7 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-[#ff914d] to-[#fe6100] rounded-full"
+          className="h-full bg-gradient-to-r from-[#b91d00] to-[#fe6100] rounded-full"
         />
       </div>
 
@@ -65,15 +65,15 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
                 key={step.id}
                 whileHover={{ scale: 1.05 }}
                 className={`flex flex-col items-center text-center   place-items-center 
-                            ${isCompleted || isCurrent ? "text-[#ff914d]" : "text-gray-400"}`}
+                            ${isCompleted || isCurrent ? "text-[#b91d00]" : "text-gray-400"}`}
               >
                 <motion.div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold mb-2 shadow-md
                     ${
                       isCompleted
-                        ? "bg-[#ff914d] text-white"
+                        ? "bg-[#b91d00] text-white"
                         : isCurrent
-                        ? "bg-white text-[#ff914d] border-2 border-[#ff914d]"
+                        ? "bg-white text-[#b91d00] border-2 border-[#b91d00]"
                         : "bg-gray-200 text-gray-400"
                     }`}
                   initial={{ scale: 0.8, opacity: 0 }}

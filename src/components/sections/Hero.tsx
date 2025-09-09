@@ -25,7 +25,7 @@ function FloatingPaths({ position }: { position: number }) {
   return (
     <div className="absolute inset-0 pointer-events-none">
       <svg
-        className="w-full h-full text-[#ff914d] dark:text-white"
+        className="w-full h-full text-[#b91d00] dark:text-white"
         viewBox="0 0 696 316"
         fill="none"
       >
@@ -76,12 +76,12 @@ export default function Hero({ data }: HeroProps) {
   const [guests, setGuests] = useState("");
 
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-neutral-950">
+    <div className="relative min-h-screen w-full  overflow-hidden bg-white dark:bg-neutral-950">
       <div className="absolute inset-0">
         <FloatingPaths position={1} />
       </div>
 
-      <section className="relative lg:px-16 overflow-hidden">
+      <section className="relative lg:px-16 overflow-hidden lg:mt-10">
         {/* Floating background flight */}
         <motion.img
           className="absolute top-10 right-10 lg:w-[30vh] w-[10vh] h-auto bg-cover"
@@ -92,9 +92,9 @@ export default function Hero({ data }: HeroProps) {
         />
 
         {/* Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-full lg:pb-8">
           {/* Left Section */}
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 h-full flex flex-col items-center justify-center">
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 h-full flex flex-col gap-4 items-center justify-center">
             <motion.div
               className="text-center md:text-left"
               initial={{ opacity: 0, y: 40 }}
@@ -104,7 +104,7 @@ export default function Hero({ data }: HeroProps) {
               <h1 className="text-4xl md:text-6xl font-bold text-slate-800 mb-4">
                 {data.title}{" "}
                 <motion.span
-                  className="text-[#ff914d] inline-block"
+                  className="text-[#b91d00] inline-block"
                   initial={{ scale: 0.8 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
@@ -124,7 +124,7 @@ export default function Hero({ data }: HeroProps) {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="w-full"
             >
-              <Card className="p-6 bg-white shadow-xl border-0  mx-auto w-full">
+              <Card className="p-6 bg-white shadow-xl border  mx-auto w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {/* Destination */}
                   <div className="relative">
@@ -197,7 +197,7 @@ export default function Hero({ data }: HeroProps) {
                 <div className="flex justify-end">
                   <Button
                     size="lg"
-                    className="w-full md:w-auto bg-[#ff914d] hover:bg-teal-700 text-white px-8 py-3 text-lg font-semibold transition-transform hover:scale-105"
+                    className="w-full md:w-auto bg-[#b91d00] hover:bg-teal-700 text-white px-8 py-3 text-lg font-semibold transition-transform hover:scale-105"
                   >
                     <Search className="mr-2 h-5 w-5" />
                     {data.search}

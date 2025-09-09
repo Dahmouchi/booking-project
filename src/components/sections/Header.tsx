@@ -73,8 +73,8 @@ export default function Header({ data, currentLang }: HeaderProps) {
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="sticky top-0 z-50"
     >
-      <div className=" mx-auto px-4 sm:px-6 lg:px-20 py-2">
-        <div className="flex justify-between items-center">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-20 py-4 ">
+        <div className="flex justify-between items-center border bg-gradient-to-r  rounded-full px-4 py-2 shadow-md">
           {/* Logo */}
           <motion.div
             className="flex items-center"
@@ -82,7 +82,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <img src="/images/logov1.png" alt="" className="w-36 h-auto" />
+            <img src="/images/logov1.png" alt="" className="w-36 h-auto mx-4" />
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -90,7 +90,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
             {/* Home Link */}
             <motion.a
               href="#home"
-              className="flex items-center space-x-1 text-slate-700 hover:text-[#ff914d] transition-colors relative overflow-hidden group"
+              className="flex items-center space-x-1 text-slate-700 hover:text-[#b91d00] transition-colors relative overflow-hidden group"
               whileHover="hover"
               whileTap="tap"
               variants={{
@@ -101,7 +101,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
               <Home size={18} />
               <span>{data.home}</span>
               <motion.span
-                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ff914d]"
+                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#b91d00]"
                 initial={{ scaleX: 0 }}
                 variants={{
                   hover: { scaleX: 1 },
@@ -113,7 +113,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
             {/* Host Link */}
             <motion.a
               href="#host"
-              className="flex items-center space-x-1 text-slate-700 hover:text-[#ff914d] transition-colors relative overflow-hidden group"
+              className="flex items-center space-x-1 text-slate-700 hover:text-[#b91d00] transition-colors relative overflow-hidden group"
               whileHover="hover"
               whileTap="tap"
               variants={{
@@ -124,7 +124,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
               <UserPlus size={18} />
               <span>{data.host}</span>
               <motion.span
-                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ff914d]"
+                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#b91d00]"
                 initial={{ scaleX: 0 }}
                 variants={{
                   hover: { scaleX: 1 },
@@ -136,7 +136,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
             {/* Contact Link */}
             <motion.a
               href="#contact"
-              className="flex items-center space-x-1 text-slate-700 hover:text-[#ff914d] transition-colors relative overflow-hidden group"
+              className="flex items-center space-x-1 text-slate-700 hover:text-[#b91d00] transition-colors relative overflow-hidden group"
               whileHover="hover"
               whileTap="tap"
               variants={{
@@ -147,7 +147,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
               <Phone size={18} />
               <span>{data.contact}</span>
               <motion.span
-                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#ff914d]"
+                className="absolute bottom-0 left-0 w-full h-0.5 bg-[#b91d00]"
                 initial={{ scaleX: 0 }}
                 variants={{
                   hover: { scaleX: 1 },

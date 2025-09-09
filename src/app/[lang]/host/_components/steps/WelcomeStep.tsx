@@ -55,7 +55,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext }) => {
       {/* Top Nav */}
       <div className="h-screen w-full flex flex-col justify-between">
         <header className="flex justify-between items-center p-4 border-b">
-           <Link href={"/"} className="cursor-pointer"> <Image src="/images/logo.png" alt="Logo" width={82} height={82} /></Link>
+           <Link href={"/"} className="cursor-pointer"> <Image src="/images/logov1.png" alt="Logo" width={82} height={82} /></Link>
           <div className="flex gap-2 lg:text-md text-xs">
             <button className="px-4 py-2 border rounded-full">
               Des questions ?

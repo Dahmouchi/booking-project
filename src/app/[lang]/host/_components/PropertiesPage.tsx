@@ -40,7 +40,7 @@ export default function PropertiesPage({ properties }: { properties: any }) {
           </h2>
         </div>
         <Link href="/host/dashboard/publicite/add">
-          <button className="group relative cursor-pointer hover:shadow-2xl inline-flex items-center gap-3 px-4 py-2 text-lg font-semibold text-white rounded-2xl bg-gradient-to-r from-[#ff914d] to-[#fc6608] shadow-lg ">
+          <button className="group relative cursor-pointer hover:shadow-2xl inline-flex items-center gap-3 px-4 py-2 text-lg font-semibold text-white rounded-2xl bg-gradient-to-r from-[#b91d00] to-[#fc6608] shadow-lg ">
             <LucideIcons.Plus className="relative z-10 w-6 h-6" />
             <span className="relative z-10">Ajouter Propriété</span>
           </button>
@@ -73,7 +73,7 @@ export default function PropertiesPage({ properties }: { properties: any }) {
                     transition={{ duration: 0.3 }}
                   />
                   {property.type && (
-                    <Badge className="absolute top-4 left-4 bg-[#ff914d] hover:bg-teal-700 text-white">
+                    <Badge className="absolute top-4 left-4 bg-[#b91d00] hover:bg-teal-700 text-white">
                       {property.type}
                     </Badge>
                   )}

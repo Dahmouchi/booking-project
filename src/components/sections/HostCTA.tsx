@@ -30,7 +30,7 @@ const icons = [Euro, Shield, Users];
 export default function HostCTA({ data, dir = 'ltr' }: HostCTAProps) {
   return (
    
-<section className="py-16 md:py-24 bg-gradient-to-br from-[#ff914d] to-[#f48617] text-white" dir={dir} id='host'>
+<section className="py-16 md:py-24 bg-gradient-to-br from-[#b91d00] to-[#f48617] text-white" dir={dir} id='host'>
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       
@@ -84,7 +84,7 @@ export default function HostCTA({ data, dir = 'ltr' }: HostCTAProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
-          <Button size="lg" className="bg-white text-[#ff914d] hover:bg-teal-50 font-semibold px-8 py-3">
+          <Button size="lg" className="bg-white text-[#b91d00] hover:bg-teal-50 font-semibold px-8 py-3">
             {data.ctaPrimary}
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
@@ -122,7 +122,7 @@ export default function HostCTA({ data, dir = 'ltr' }: HostCTAProps) {
               className={`absolute ${index === 0 ? '-bottom-6 -left-6' : '-top-6 -right-6'} bg-white shadow-xl border-0`}
             >
               <CardContent className="p-6">
-                <div className="text-2xl font-bold text-[#ff914d] mb-1">{stat.value}</div>
+                <div className="text-2xl font-bold text-[#b91d00] mb-1">{stat.value}</div>
                 <div className="text-sm text-slate-600">{stat.label}</div>
               </CardContent>
             </Card>

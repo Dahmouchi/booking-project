@@ -15,7 +15,7 @@ export default function Footer({ data }: { data: any }) {
 
             {/* Brand Section */}
             <div className="lg:col-span-2">
-              <div className='bg-white p-4 rounded-lg w-fit mb-4'><img src="/images/logo.png" alt="Logo" className="w-36 h-auto" /></div>
+              <div className='bg-white p-4 rounded-lg w-fit mb-4'><img src="/images/logov1.png" alt="Logo" className="w-36 h-auto" /></div>
               <p className="text-slate-300 leading-relaxed">{data.brandDesc}</p>
 
               {/* Contact Info (static for now) */}
@@ -98,7 +98,7 @@ export default function Footer({ data }: { data: any }) {
                 placeholder={data.newsletter.placeholder}
                 className="flex-1 px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-teal-400"
               />
-              <button className="bg-[#ff914d] hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+              <button className="bg-[#b91d00] hover:bg-teal-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
                 {data.newsletter.subscribe}
               </button>
             </div>

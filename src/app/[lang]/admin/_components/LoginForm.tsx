@@ -70,7 +70,7 @@ const LoginForm = () => {
         <div className="pb-8">
           <div className="mt-5 w-full flex items-center justify-center ">
             <Link href="/" className="lg:flex">
-              <img src="/images/logo.png" alt="" className="w-56 h-auto" />
+              <img src="/images/logov1.png" alt="" className="w-56 h-auto" />
             </Link>
           </div>
           <div className="w-full flex items-center justify-center mt-4">
@@ -142,7 +142,7 @@ const LoginForm = () => {
             <div className="w-full flex items-center justify-start">
               <Button
                 type="submit"
-                className="w-full rounded-full py-3 bg-[#18375d] border-2 text-[#ff914d] hover:bg-[#2d4562] cursor-pointer"
+                className="w-full rounded-full py-3 bg-[#18375d] border-2 text-[#b91d00] hover:bg-[#2d4562] cursor-pointer"
               >
                 Soumettre
               </Button>

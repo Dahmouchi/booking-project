@@ -143,7 +143,7 @@ function App() {
           {/* Header */}
           <header className="flex justify-between items-center p-4 border-b bg-white z-50 relative">
             <Link href="/" className="cursor-pointer">
-              <Image src="/images/logo.png" alt="Logo" width={82} height={82} />
+              <Image src="/images/logov1.png" alt="Logo" width={82} height={82} />
             </Link>
 
             <div className="flex gap-2 lg:text-md text-xs">

@@ -1,29 +1,29 @@
-import Header from '@/components/sections/Header';
-import Hero from '@/components/sections/Hero';
-import HowItWorks from '@/components/sections/HowItWorks';
-import FeaturedProperties from '@/components/sections/FeaturedProperties';
-import Testimonials from '@/components/sections/Testimonials';
-import HostCTA from '@/components/sections/HostCTA';
-import Footer from '@/components/sections/Footer';
-import { getDictionary } from './dictionaries';
+import Header from "@/components/sections/Header";
+import Hero from "@/components/sections/Hero";
+import HowItWorks from "@/components/sections/HowItWorks";
+import FeaturedProperties from "@/components/sections/FeaturedProperties";
+import Testimonials from "@/components/sections/Testimonials";
+import HostCTA from "@/components/sections/HostCTA";
+import Footer from "@/components/sections/Footer";
+import { getDictionary } from "./dictionaries";
 
 export default async function Page({
   params,
 }: {
-  params: Promise<{ lang: 'en' | 'ar'| 'fr' }>;
+  params: Promise<{ lang: "en" | "ar" | "fr" }>;
 }) {
-  const { lang } = await params
-  const dict = await getDictionary(lang) // en
-  
+  const { lang } = await params;
+  const dict = await getDictionary(lang); // en
+
   return (
     <main className="min-h-screen">
       <Header data={dict.header} currentLang={lang} />
-      <Hero data={dict.hero}/>
-      <HowItWorks data={dict.howItWorks}/>
+      <Hero data={dict.hero} />
       <FeaturedProperties data={dict.featuredProperties} />
-      <Testimonials data={dict.testimonials}/>
-      <HostCTA data={dict.hostCTA}/>
-      <Footer data={dict.footer}/>
+      <HowItWorks data={dict.howItWorks} />
+      <Testimonials data={dict.testimonials} />
+      <HostCTA data={dict.hostCTA} />
+      <Footer data={dict.footer} />
     </main>
   );
 }

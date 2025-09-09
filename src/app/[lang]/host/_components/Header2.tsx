@@ -109,7 +109,7 @@ const Header = () => {
     });
   }
   return (
-    <header className="flex h-16 items-center justify-between  ">
+    <header className="flex h-16 items-center justify-between border-b px-4 ">
   {/* Left section: breadcrumb */}
   <div className="flex items-center gap-3 bg-white rounded-lg py-2 shadow px-4">
     <SidebarTrigger className="cursor-pointer text-slate-800 " />
@@ -137,7 +137,7 @@ const Header = () => {
           {unreadNewslettersCount > 0 && (
             <Badge
               variant="destructive"
-              className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-[#ff914d] text-white"
+              className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-[#b91d00] text-white"
             >
               {unreadNewslettersCount}
             </Badge>
@@ -152,7 +152,7 @@ const Header = () => {
     ) : (
       <Button
         onClick={() => redirect("/user")}
-        className="gap-2.5 px-6 bg-gradient-to-r from-[#ff914d] to-[#f76e19] text-white rounded-full shadow-md"
+        className="gap-2.5 px-6 bg-gradient-to-r from-[#b91d00] to-[#f76e19] text-white rounded-full shadow-md"
       >
         <KeySquare /> S&apos;Identifier
       </Button>

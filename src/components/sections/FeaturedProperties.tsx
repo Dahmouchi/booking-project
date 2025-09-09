@@ -146,7 +146,7 @@ export default function FeaturedProperties({ data}: FeaturedPropertiesProps) {
                   />
                   {property.badge && (
                     <Badge 
-                      className="absolute top-4 left-4 bg-[#ff914d] hover:bg-teal-700 text-white"
+                      className="absolute top-4 left-4 bg-[#b91d00] hover:bg-teal-700 text-white"
                     >
                       {property.badge}
                     </Badge>
@@ -209,7 +209,7 @@ export default function FeaturedProperties({ data}: FeaturedPropertiesProps) {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[#ff914d] hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+            className="bg-[#b91d00] hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
           >
             {data.button}
           </motion.button>

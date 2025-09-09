@@ -37,7 +37,7 @@ const monthlySales = [
   { name: "Dec", value: 100 },
 ]
 
-const gaugeData = [{ name: "Target", value: 75.55, fill: "#ff914d" }]
+const gaugeData = [{ name: "Target", value: 75.55, fill: "#b91d00" }]
 
 // --- Small Utils ---
 function TrendBadge({ up = true, value = "11.01%" }: { up?: boolean; value?: string }) {
@@ -227,7 +227,7 @@ export default function HostDashboardPage() {
     <div className="relative min-h-screen">
       {/* Glow Background */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] h-80 w-80 rounded-full bg-[#ff914d]/25 blur-[120px]" />
+        <div className="absolute top-[-10%] left-[-10%] h-80 w-80 rounded-full bg-[#b91d00]/25 blur-[120px]" />
         <div className="absolute bottom-0 right-[-10%] h-96 w-96 rounded-full bg-indigo-500/10 blur-[140px]" />
       </div>
 

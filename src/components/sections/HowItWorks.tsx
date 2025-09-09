@@ -75,9 +75,9 @@ export default function HowItWorks({ data, dir = "ltr" }: HowItWorksProps) {
           className="text-center mt-16"
         >
           <div className="inline-flex items-center space-x-2 text-slate-600">
-            <div className="w-8 h-0.5 bg-[#ff914d]"></div>
+            <div className="w-8 h-0.5 bg-[#b91d00]"></div>
             <span className="text-sm font-medium">{data.cta}</span>
-            <div className="w-8 h-0.5 bg-[#ff914d]"></div>
+            <div className="w-8 h-0.5 bg-[#b91d00]"></div>
           </div>
         </motion.div>
       </div>

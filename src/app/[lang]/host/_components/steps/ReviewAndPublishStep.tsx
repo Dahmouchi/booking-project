@@ -31,7 +31,7 @@ export const ReviewAndPublishStep: React.FC<ReviewAndPublishStepProps> = ({
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-4xl mx-auto">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl text-center">
@@ -93,8 +93,8 @@ export const ReviewAndPublishStep: React.FC<ReviewAndPublishStepProps> = ({
               </Button>
             </h3>
             <div className="grid grid-cols-3 gap-2">
-              {formData.photos.length > 0 ? (
-                formData.photos.map((file, index) => (
+              {formData.images.length > 0 ? (
+                formData.images.map((file, index) => (
                   <img key={index} src={URL.createObjectURL(file)} alt={`Photo ${index + 1}`} className="w-full h-24 object-cover rounded-md" />
                 ))
               ) : (

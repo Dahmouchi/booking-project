@@ -27,8 +27,8 @@ export const PhotosStep: React.FC<PhotosStepProps> = ({
     if (event.target.files) {
       const newFiles = Array.from(event.target.files);
       onUpdateField(
-        'photos',
-        [...formData.photos, ...newFiles]
+        'images',
+        [...formData.images, ...newFiles]
       );
     }
   };
@@ -39,11 +39,11 @@ export const PhotosStep: React.FC<PhotosStepProps> = ({
     if (event.dataTransfer.files) {
       const newFiles = Array.from(event.dataTransfer.files);
       onUpdateField(
-        'photos',
-        [...formData.photos, ...newFiles]
+        'images',
+        [...formData.images, ...newFiles]
       );
     }
-  }, [formData.photos, onUpdateField]);
+  }, [formData.images, onUpdateField]);
 
   const handleDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -56,13 +56,13 @@ export const PhotosStep: React.FC<PhotosStepProps> = ({
 
   const removePhoto = (indexToRemove: number) => {
     onUpdateField(
-      'photos',
-      formData.photos.filter((_, index) => index !== indexToRemove)
+      'images',
+      formData.images.filter((_, index) => index !== indexToRemove)
     );
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="w-full mx-auto lg:p-10">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl text-center">
@@ -103,9 +103,9 @@ export const PhotosStep: React.FC<PhotosStepProps> = ({
             <p className="text-sm text-red-500">{errors.photos}</p>
           )}
 
-          {formData.photos.length > 0 && (
+          {formData.images.length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-4">
-              {formData.photos.map((file, index) => (
+              {formData.images.map((file, index) => (
                 <div key={index} className="relative group">
                   <img
                     src={URL.createObjectURL(file)}

@@ -6,23 +6,19 @@ import { revalidatePath } from "next/cache";
 import { hash } from "bcrypt";
 
 import { uploadImage } from "./images";
-export async function UpdateToHost(
-  userId: string
-) {
+export async function UpdateToHost(userId: string) {
   try {
-    const res = await prisma.user.update({
-        where:{
-            id:userId,
-        },
-        data:{
-            role:"HOST",
-        }
-    })
-
-    
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        role: "HOST",
+      },
+    });
 
     revalidatePath("/");
-    return { success: true};
+    return { success: true };
   } catch (error) {
     console.error("Error creating category:", error);
     return { success: false, error: "Failed to create category" };
@@ -39,7 +35,25 @@ export async function getClientById(id: string) {
     return null;
   }
 }
-
+export async function getProperties(id: string) {
+  try {
+    const client = await prisma.property.findMany({
+      where: { ownerId:id },
+      include:{
+        amenities:{
+          include:{
+            amenity:true,
+          }
+        },
+        services:true,
+      }
+    });
+    return client;
+  } catch (error) {
+    console.error("Error fetching client:", error);
+    return null;
+  }
+}
 interface PropertyFormData {
   firstName: string;
   lastName: string;
@@ -61,12 +75,12 @@ interface PropertyFormData {
   bookingNotice?: string;
   seasonalPricing?: boolean;
   longStayDiscounts?: boolean;
-  images?: string[]; // must be URLs (not File objects)
+  images?: File[]; 
+  amenities?: string[];
+  additionalServices?: string[];
 }
 
-export async function createPropertyAndUpdateUser(
-  formData: PropertyFormData
-) {
+export async function createPropertyAndUpdateUser(formData: PropertyFormData) {
   try {
     const {
       firstName,
@@ -90,6 +104,8 @@ export async function createPropertyAndUpdateUser(
       seasonalPricing,
       longStayDiscounts,
       images,
+      amenities,
+      additionalServices,
     } = formData;
 
     // Hash password if provided
@@ -147,6 +163,26 @@ export async function createPropertyAndUpdateUser(
         ownerId: user.id,
       },
     });
+    if (amenities && amenities.length > 0) {
+      await prisma.propertyAmenity.createMany({
+        data: amenities.map((amenityId: string) => ({
+          propertyId: property.id,
+          amenityId,
+        })),
+        skipDuplicates: true, // avoid duplicate entries
+      });
+    }
+
+    // Connect additional services
+    if (additionalServices && additionalServices.length > 0) {
+      await prisma.propertyService.createMany({
+        data: additionalServices.map((serviceId: string) => ({
+          propertyId: property.id,
+          serviceId,
+        })),
+        skipDuplicates: true,
+      });
+    } 
 
     return { success: true, property, user };
   } catch (error: any) {
@@ -154,4 +190,3 @@ export async function createPropertyAndUpdateUser(
     return { success: false, error: error.message };
   }
 }
-

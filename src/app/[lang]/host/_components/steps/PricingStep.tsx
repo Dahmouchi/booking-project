@@ -24,7 +24,7 @@ export const PricingStep: React.FC<PricingStepProps> = ({
   const estimatedMonthlyRevenue = formData.pricePerNight * 20; // Exemple simple: 20 nuits par mois
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="w-full mx-auto lg:p-10">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl text-center">

@@ -37,6 +37,9 @@ model Property {
   images            String[] // Array of image URLs
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
+  amenities       PropertyAmenity[]
+  services        PropertyService[]
+
 
   // Relations
   owner    User      @relation(fields: [ownerId], references: [id])
@@ -44,7 +47,52 @@ model Property {
   bookings Booking[]
   reviews  Review[]
 }
+model AmenityCategory {
+  id        String    @id @default(cuid())
+  name      String    // e.g. "Essentiels", "Divertissement", "Extérieur", "Sécurité"
+  amenities Amenity[]
+}
 
+model Amenity {
+  id          String           @id @default(cuid())
+  name        String           // e.g. "Wi-Fi"
+  icon        String?          // e.g. "Wifi"
+  categoryId  String
+  category    AmenityCategory  @relation(fields: [categoryId], references: [id])
+  
+  // Relation with Property
+  properties  PropertyAmenity[]
+}
+model PropertyAmenity {
+  id          String   @id @default(cuid())
+  propertyId  String
+  amenityId   String
+
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  amenity     Amenity  @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  @@unique([propertyId, amenityId]) // Avoid duplicates
+}
+model AdditionalService {
+  id         String   @id @default(cuid())
+  name       String   // e.g. "Petit-déjeuner inclus"
+  icon       String?  // e.g. "Coffee"
+
+  // Relation with Property
+  properties PropertyService[]
+}
+
+// Join table: Property <-> AdditionalService
+model PropertyService {
+  id          String             @id @default(cuid())
+  propertyId  String
+  serviceId   String
+
+  property    Property           @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  service     AdditionalService  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@unique([propertyId, serviceId]) // Avoid duplicates
+}
 model Booking {
   id         String        @id @default(cuid())
   checkIn    DateTime

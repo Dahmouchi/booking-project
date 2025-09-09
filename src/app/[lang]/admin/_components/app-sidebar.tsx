@@ -24,7 +24,9 @@ import {
   Key,
   Shapes,
   LibraryBig,
-  BookText
+  BookText,
+  LayoutDashboard,
+  Search
 } from "lucide-react";
 
 import { NavMain } from "./nav-main";
@@ -38,6 +40,7 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { title } from "process";
+import { Input } from "@/components/ui/input";
 
 
 // This is sample data.
@@ -61,29 +64,9 @@ const datas = {
       icon: House,
     },
     {
-      title: "Codes",
-      url: "/admin/dashboard/codes",
-      icon: Key,
-    },
-    {
-      title: "Niveaux",
-      url: "/admin/dashboard/niveaux",
-      icon: Route,
-    },
-  {
-      title: "Classes",
-      url: "/admin/dashboard/classes",
-      icon: Shapes,
-    },
-    {
-      title: "Matieres",
-      url: "/admin/dashboard/matieres",
-      icon: LibraryBig,
-    },
-    {
-      title: "Cours",
-      url: "/admin/dashboard/cours",
-      icon: BookText,
+      title: "Services",
+      url: "/admin/dashboard/services",
+      icon: LayoutDashboard,
     },
     {
       title: "Utilisateurs",
@@ -105,9 +88,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props} className="bg-white dark:bg-slate-800 p-2 flex flex-col items-center justify-center bg ">
       <SidebarHeader className="dark:bg-slate-900 flex items-center bg-white justify-center rounded-t-xl ">
-        <Image src={`${state === "expanded" ? '/images/logo.png':'/logo.png'}`} alt="logo" width={state === "expanded" ? 300 : 500 } height={state === "expanded" ? 200 : 500 }/>
+        <Image src={`${state === "expanded" ? '/images/logov1.png':'/images/logov2.png'}`} alt="logo" width={state === "expanded" ? 300 : 500 } height={state === "expanded" ? 200 : 500 }/>
+     
       </SidebarHeader>
       <SidebarContent className="dark:bg-slate-900 pl-0 bg-white rounded-b-xl mt-3">
+        <div className={`px-3 py-2 ${state === "expanded" ? '':'hidden'}`}>
+            <div className="relative">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Input type="search" placeholder="Search..." className="w-full rounded-2xl bg-muted pl-9 pr-4 py-2" />
+            </div>
+          </div> 
         <NavMain items={datas.navMain} />
       </SidebarContent>
       <SidebarRail />

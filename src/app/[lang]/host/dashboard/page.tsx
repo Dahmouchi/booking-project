@@ -1,9 +1,12 @@
 import React from 'react'
+import HostDashboardPage from '../_components/Dashboard'
 
-const Admi = () => {
+const Home = () => {
   return (
-    <div>Admi</div>
+    <div>
+      <HostDashboardPage  />
+    </div>
   )
 }
 
-export default Admi
+export default Home

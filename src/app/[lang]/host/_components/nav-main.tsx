@@ -31,7 +31,7 @@ export function NavMain({
 
   // Function to remove the language prefix ("/fr" or "/en") from pathname
   const getPathWithoutLocale = (path: string) => {
-    return path.replace(/^\/(fr|en)/, ""); // Removes the "/fr" or "/en" prefix
+    return path.replace(/^\/(fr|en|ar)/, ""); // Removes the "/fr" or "/en" prefix
   };
 
   return (
@@ -39,10 +39,11 @@ export function NavMain({
       
       <SidebarMenu>
         {items.map((item) => {
-          const isActive =
-          getPathWithoutLocale(pathname) === item.url ||
-          (item.url !== "/admin/dashboard" && getPathWithoutLocale(pathname).startsWith(item.url));
-        
+         const currentPath = getPathWithoutLocale(pathname);
+
+const isActive =
+  currentPath === item.url || 
+  (item.items && currentPath.startsWith(item.url));
           return (
             <Collapsible key={item.title} asChild  className="group/collapsible">
               <SidebarMenuItem>
@@ -53,12 +54,12 @@ export function NavMain({
                       tooltip={item.title}
                       className={clsx(
                         "cursor-pointer transition-all rounded-lg duration-200 py-5",
-                        isActive ? "bg-blue-500 shadow-[4px_6px_7px_0px_rgba(0,_0,_0,_0.1)]  text-white hover:bg-blue-700 hover:text-white  font-semibold" : "hover:bg-white dark:hover:bg-gray-800"
+                        isActive ? "bg-[#ff914d] shadow-[4px_6px_7px_0px_rgba(0,_0,_0,_0.1)]  text-white hover:bg-[#f76e19] hover:text-white  font-semibold" : "hover:bg-white text-white dark:hover:bg-gray-800"
                       )}
                     >
                       <div  className={`${
                           isActive && state === "expanded" 
-                            ? "bg-white rounded-md p-1.5 text-blue-500"
+                            ? "bg-white rounded-md p-1.5 text-[#ff914d]"
                             : ""
                         }`}>  {item.icon && <item.icon className="w-4 h-4"/>}</div>  
                       <span>{item.title}</span>

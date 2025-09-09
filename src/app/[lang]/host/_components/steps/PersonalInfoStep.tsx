@@ -26,8 +26,8 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
   
   return (
-    <div className="max-w-2xl mx-auto">
-      <Card>
+    <div className="w-full mx-auto lg:p-10">
+      <Card className='border-2 border-amber-600/50 shadow-lg bg-white'>
         <CardHeader>
           <CardTitle className="text-2xl text-center">
             Vos informations personnelles

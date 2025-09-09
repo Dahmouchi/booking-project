@@ -13,7 +13,8 @@ const initialFormData: HostRegistrationData = {
   confirmPassword: '',
   acceptTerms: false,
   acceptPrivacy: false,
-
+  country:'',
+  city:'',
   // Détails de la propriété
   propertyType: '',
   address: '',
@@ -28,7 +29,7 @@ const initialFormData: HostRegistrationData = {
   additionalServices: [],
 
   // Photos
-  photos: [],
+  images: [],
 
   // Disponibilité
   availabilityCalendar: [],
@@ -94,6 +95,8 @@ export const useRegistrationForm = () => {
       case 3: // Détails de la propriété
         if (!formData.propertyType) newErrors.propertyType = 'Le type de propriété est requis';
         if (!formData.address.trim()) newErrors.address = 'L\'adresse est requise';
+         if (!formData.address.trim()) newErrors.address = 'L\'adresse est requise';
+        if (!formData.country.trim()) newErrors.country = 'L\'adresse est requise';
         if (!formData.description.trim()) newErrors.description = 'La description est requise';
         break;
 
@@ -104,8 +107,8 @@ export const useRegistrationForm = () => {
         break;
 
       case 5: // Photos
-        if (formData.photos.length === 0) {
-          newErrors.photos = 'Ajoutez au moins une photo';
+        if (formData.images.length === 0) {
+          newErrors.images = 'Ajoutez au moins une photo';
         }
         break;
 

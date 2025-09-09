@@ -24,7 +24,7 @@ export default function HowItWorks({ data, dir = "ltr" }: HowItWorksProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 my-4">
             {data.title}
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
@@ -33,7 +33,7 @@ export default function HowItWorks({ data, dir = "ltr" }: HowItWorksProps) {
         </motion.div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 place-items-center">
           {data.steps.map((step, index) => (
             <motion.div
               key={index}
@@ -42,7 +42,7 @@ export default function HowItWorks({ data, dir = "ltr" }: HowItWorksProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
              
-              className="relative flex w-80 flex-col rounded-xl bg-white text-gray-700 shadow-md transform transition-all duration-300 hover:shadow-xl"
+              className="relative flex w-80  flex-col rounded-xl border bg-white text-gray-700 shadow-md transform transition-all duration-300 hover:shadow-xl"
             >
               {/* Image */}
               <div

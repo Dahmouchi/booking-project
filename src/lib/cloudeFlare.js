@@ -26,7 +26,7 @@ export const uploadFile = async (fileContent, fileName, mimeType) => {
 };
 
 export const getFileUrl = (fileName) => {
-  const endpoint = "https://pub-8e718d4717894c2d8394aa3ab82551f4.r2.dev";
+  const endpoint = "https://pub-060265d5b1f645428fcbed1375c4fe21.r2.dev";
   const bucket = process.env.NEXT_PUBLIC_CLOUD_FLARE_BUCKET_NAME;
 
   return `${endpoint}/${bucket}/${fileName}`;

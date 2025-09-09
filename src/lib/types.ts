@@ -30,7 +30,8 @@ export interface HostRegistrationData {
   confirmPassword: string;
   acceptTerms: boolean;
   acceptPrivacy: boolean;
-
+  country:string,
+  city:string,
   // Étape 2: Détails de la propriété
   propertyType: string;
   address: string;
@@ -45,7 +46,7 @@ export interface HostRegistrationData {
   additionalServices: string[];
 
   // Étape 4: Photos
-  photos: File[];
+  images: File[];
 
   // Étape 5: Disponibilité
   availabilityCalendar: Date[];
@@ -58,7 +59,36 @@ export interface HostRegistrationData {
   seasonalPricing: boolean;
   longStayDiscounts: boolean;
 }
+export interface PropertyData {
+  // Étape 2: Détails de la propriété
+  title:string;
+  propertyType: string;
+  address: string;
+  bedrooms: number;
+  beds: number;
+  bathrooms: number;
+  maxGuests: number;
+  description: string;
+  country:string,
+  city:string,
+  // Étape 3: Équipements et services
+  amenities: string[];
+  additionalServices: string[];
 
+  // Étape 4: Photos
+  images: File[];
+
+  // Étape 5: Disponibilité
+  availabilityCalendar: Date[];
+  minStayDuration: number;
+  maxStayDuration: number;
+  bookingNotice: string;
+
+  // Étape 6: Tarification
+  pricePerNight: number;
+  seasonalPricing: boolean;
+  longStayDiscounts: boolean;
+}
 export interface RegistrationStep {
   id: number;
   title: string;

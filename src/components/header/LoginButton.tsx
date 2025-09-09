@@ -3,7 +3,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlignJustify, LogOut, X } from "lucide-react";
+import {
+  AlignJustify,
+  HelpCircle,
+  LogIn,
+  LogOut,
+  UserPlus,
+  X,
+} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,16 +19,19 @@ import {
   DialogDescription,
   DialogTrigger,
   DialogClose,
+  DialogFooter,
+  useDialogDropdownFix,
 } from "@/components/ui/dialog";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -59,31 +69,36 @@ export default function AuthDialogButton() {
   const [loading, setLoading] = useState(false);
   const { data: session, update } = useSession();
   const router = useRouter();
+  const [ta, setTa] = useState("login");
   const signInWithGoogle = (mode: string) => {
     signIn("google");
     setOpen(false);
   };
+
   const sendOtp = () => {
     console.log("Send OTP to:", phone);
     setOtpSent(true);
   };
+
   const verifyOtp = (mode: string) => {
     console.log(`Verify OTP (${mode})`, otp);
     setOpen(false);
   };
+  const { dialogOpen, setDialogOpen, dropdownOpen, setDropdownOpen, handleDialogOpen } = useDialogDropdownFix()
 
   return (
-    <>
-      <DropdownMenu>
+     <>
+      {/* DropdownMenu with modal={false} */}
+      <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen} modal={false}>
         <DropdownMenuTrigger asChild>
           <Button
             variant="outline"
             size="icon"
-            className={`${session && " w-fit pl-2"} rounded-2xl`}
+            className={`${session && "w-fit pl-2"} rounded-2xl`}
           >
-            <AlignJustify className="h-5 w-5 " />
+            <AlignJustify className="h-5 w-5" />
             {session && (
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="h-8 w-8 rounded-lg ml-2">
                 {session.user.image ? (
                   <AvatarImage
                     src={session.user.image}
@@ -99,42 +114,65 @@ export default function AuthDialogButton() {
             )}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem>Centre aide</DropdownMenuItem>
-         
+
+        <DropdownMenuContent
+          className="w-56"
+          onCloseAutoFocus={(e) => e.preventDefault()}
+        >
+          {/* Aide */}
+          <DropdownMenuItem onClick={() => router.push("/help")}>
+            <HelpCircle className="h-4 w-4 mr-2" />
+            Centre d&apos;aide
+          </DropdownMenuItem>
+
+          <DropdownMenuSeparator />
+
           {session ? (
-             <>
-            <DropdownMenuItem
-  onClick={() =>
-    session?.user?.role === "HOST"
-      ? router.push("/host/dashboard")
-      : router.push("/host/login")
-  }
->
-  <div className="flex items-center gap-2 w-full border-y border-gray-300 py-2">
-    <img src="/images/apartment.png" alt="" className="w-8 h-8" />
-    <h1>Devenir hôte</h1>
-  </div>
-</DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => signOut({ callbackUrl: "/" })}
-              className="cursor-pointer"
-            >
-              <LogOut />
-              Se déconnecter
-            </DropdownMenuItem>
+            <>
+              {/* Tableau de bord / Devenir hôte */}
+              <DropdownMenuItem
+                onClick={() =>
+                  session.user.role === "HOST"
+                    ? router.push("/host/dashboard")
+                    : router.push("/host/inscription")
+                }
+                className="cursor-pointer"
+              >
+                <img src="/images/apartment.png" alt="" className="w-6 h-6 mr-2" />
+                {session.user.role === "HOST"
+                  ? "Tableau de bord hôte"
+                  : "Devenir hôte"}
+              </DropdownMenuItem>
+
+              {/* Déconnexion */}
+              <DropdownMenuItem
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="cursor-pointer text-red-600"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Se déconnecter
+              </DropdownMenuItem>
             </>
           ) : (
             <>
-              <DropdownMenuItem onClick={() => setOpen(true)}>
+              {/* Connexion */}
+              <DropdownMenuItem onSelect={handleDialogOpen} className="cursor-pointer">
+                <LogIn className="h-4 w-4 mr-2" />
                 Se connecter
+              </DropdownMenuItem>
+
+              {/* Inscription */}
+              <DropdownMenuItem onSelect={handleDialogOpen} className="cursor-pointer">
+                <UserPlus className="h-4 w-4 mr-2" />
+                Créer un compte
               </DropdownMenuItem>
             </>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Dialog open={open} onOpenChange={setOpen}>
+      {/* Controlled Dialog */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent className="sm:max-w-md rounded-2xl">
           <DialogHeader>
             <DialogTitle className="text-xl">Welcome</DialogTitle>
@@ -149,23 +187,21 @@ export default function AuthDialogButton() {
               <TabsTrigger value="register">Register</TabsTrigger>
             </TabsList>
 
+            {/* Login tab */}
             <TabsContent value="login" className="mt-4 space-y-4">
               <Button
                 onClick={() => signInWithGoogle("login")}
                 className="w-full gap-2 rounded-xl"
                 variant="secondary"
               >
-                <GoogleIcon /> Continue with Google
+                <GoogleIcon />
+                Continue with Google
               </Button>
               {!otpSent ? (
                 <div className="space-y-2">
                   <Label>Phone number</Label>
                   <div className="flex gap-2">
-                    <Input
-                      type="tel"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                    <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
                     <Button onClick={sendOtp}>Send code</Button>
                   </div>
                 </div>
@@ -178,23 +214,21 @@ export default function AuthDialogButton() {
               )}
             </TabsContent>
 
+            {/* Register tab */}
             <TabsContent value="register" className="mt-4 space-y-4">
               <Button
                 onClick={() => signInWithGoogle("register")}
                 className="w-full gap-2 rounded-xl"
                 variant="secondary"
               >
-                <GoogleIcon /> Sign up with Google
+                <GoogleIcon />
+                Sign up with Google
               </Button>
               {!otpSent ? (
                 <div className="space-y-2">
                   <Label>Phone number</Label>
                   <div className="flex gap-2">
-                    <Input
-                      type="tel"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                    />
+                    <Input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
                     <Button onClick={sendOtp}>Send code</Button>
                   </div>
                 </div>
@@ -209,6 +243,6 @@ export default function AuthDialogButton() {
           </Tabs>
         </DialogContent>
       </Dialog>
-    </>
+      </>
   );
 }

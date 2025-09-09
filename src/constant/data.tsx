@@ -204,3 +204,36 @@ export const REGISTRATION_STEPS = [
     description: 'Vérification et publication'
   }
 ];
+export const PRPERTIE_STEPS = [
+  
+  {
+    id: 1,
+    title: 'Détails de la propriété',
+    description: 'Caractéristiques de votre logement'
+  },
+  {
+    id: 2,
+    title: 'Équipements',
+    description: 'Services et commodités'
+  },
+  {
+    id: 3,
+    title: 'Photos',
+    description: 'Images de votre propriété'
+  },
+  {
+    id: 4,
+    title: 'Disponibilité',
+    description: 'Calendrier et règles'
+  },
+  {
+    id: 5,
+    title: 'Tarification',
+    description: 'Prix et revenus'
+  },
+  {
+    id: 6,
+    title: 'Finalisation',
+    description: 'Vérification et publication'
+  }
+];

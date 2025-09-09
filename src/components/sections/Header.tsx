@@ -73,7 +73,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="sticky top-0 z-50"
     >
-      <div className=" mx-auto px-4 sm:px-6 lg:px-16 py-2">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-20 py-2">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <motion.div
@@ -82,7 +82,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <img src="/images/logo.png" alt="" className="w-36 h-auto" />
+            <img src="/images/logov1.png" alt="" className="w-36 h-auto" />
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -162,6 +162,7 @@ export default function Header({ data, currentLang }: HeaderProps) {
           <div className="flex items-center space-x-4">
              <LanguageSelector />
             <AuthDialogButton />
+            
           </div>
         </div>
       </div>

@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
+"use client"
+import React, { startTransition, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { HostRegistrationData } from '@/lib/types';
-import { AMENITIES, ADDITIONAL_SERVICES } from '@/constant/data';
 import * as LucideIcons from 'lucide-react';
+import { toast } from 'react-toastify';
+import { listAmenities } from '@/actions/amenities';
+import { AdditionalService, Amenity } from '@/app/[lang]/admin/dashboard/services/page';
+import { listServices } from '@/actions/services';
 
 interface AmenitiesStepProps {
   formData: HostRegistrationData;
@@ -21,6 +25,31 @@ export const AmenitiesStep: React.FC<AmenitiesStepProps> = ({
   onNext,
   onPrev,
 }) => {
+    const [amenities, setAmenities] = useState<Amenity[]>([]);
+    const [services, setServices] = useState<AdditionalService[]>([]);
+  
+    const load = async () => {
+      try {
+        const [ams,ser] = await Promise.all([
+          listAmenities(),
+          listServices()
+        ]);
+        setAmenities(ams);
+        setServices(ser)
+      } catch (e: any) {
+        toast.error(e?.message ?? "Erreur de chargement");
+      }
+    };
+  
+    useEffect(() => {
+      startTransition(load);
+    }, []);
+    function IconPreview({ name, className }: { name?: string | null; className?: string }) {
+      const map = useMemo(() => ({ ...LucideIcons }), []);
+    
+      const Cmp: any = name && (map as any)[name as keyof typeof map];
+      return Cmp ? <Cmp className={className ?? "h-4 w-4"} /> : <LucideIcons.Shapes className={className ?? "h-4 w-4"} />;
+    }
   const handleAmenityChange = (amenityId: string) => {
     const currentAmenities = formData.amenities;
     if (currentAmenities.includes(amenityId)) {
@@ -45,13 +74,10 @@ export const AmenitiesStep: React.FC<AmenitiesStepProps> = ({
     }
   };
 
-  const getIcon = (iconName: string) => {
-    const IconComponent = (LucideIcons as any)[iconName];
-    return IconComponent ? <IconComponent size={20} /> : null;
-  };
+ 
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="w-full mx-auto lg:p-10">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl text-center">
@@ -68,7 +94,7 @@ export const AmenitiesStep: React.FC<AmenitiesStepProps> = ({
               <p className="text-sm text-red-500 mb-4">{errors.amenities}</p>
             )}
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {AMENITIES.map((amenity) => (
+              {amenities.map((amenity) => (
                 <div
                   key={amenity.id}
                   className={`flex flex-col items-center justify-center p-4 border rounded-lg cursor-pointer transition-all ${formData.amenities.includes(amenity.id)
@@ -77,7 +103,7 @@ export const AmenitiesStep: React.FC<AmenitiesStepProps> = ({
                   }`}
                   onClick={() => handleAmenityChange(amenity.id)}
                 >
-                  {getIcon(amenity.icon)}
+                  <IconPreview name={amenity.icon} className="h-5 w-5" />
                   <span className="mt-2 text-sm text-center">{amenity.name}</span>
                 </div>
               ))}
@@ -87,7 +113,7 @@ export const AmenitiesStep: React.FC<AmenitiesStepProps> = ({
           <div>
             <h3 className="text-lg font-semibold mb-4">Services supplémentaires (optionnel)</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {ADDITIONAL_SERVICES.map((service) => (
+              {services.map((service) => (
                 <div
                   key={service.id}
                   className={`flex flex-col items-center justify-center p-4 border rounded-lg cursor-pointer transition-all ${formData.additionalServices.includes(service.id)
@@ -96,7 +122,7 @@ export const AmenitiesStep: React.FC<AmenitiesStepProps> = ({
                   }`}
                   onClick={() => handleServiceChange(service.id)}
                 >
-                  {getIcon(service.icon)}
+                  <IconPreview name={service.icon} className="h-5 w-5" />
                   <span className="mt-2 text-sm text-center">{service.name}</span>
                 </div>
               ))}

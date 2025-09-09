@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { HostRegistrationData } from '@/lib/types';
 import { PROPERTY_TYPES } from '@/constant/data';
+import LocationPicker from '@/components/LocationPickerRegister';
 
 interface PropertyDetailsStepProps {
   formData: HostRegistrationData;
@@ -23,7 +24,7 @@ export const PropertyDetailsStep: React.FC<PropertyDetailsStepProps> = ({
   onPrev,
 }) => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="w-full mx-auto lg:p-10">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl text-center">
@@ -53,7 +54,7 @@ export const PropertyDetailsStep: React.FC<PropertyDetailsStepProps> = ({
               <p className="text-sm text-red-500">{errors.propertyType}</p>
             )}
           </div>
-
+          <LocationPicker formData={formData} onUpdateField={onUpdateField} />
           <div className="space-y-2">
             <Label htmlFor="address">Adresse complète *</Label>
             <Input

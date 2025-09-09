@@ -27,7 +27,7 @@ export const AvailabilityStep: React.FC<AvailabilityStepProps> = ({
   // Ici, nous simulons avec des champs simples pour la démo.
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="w-full mx-auto lg:p-10">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl text-center">

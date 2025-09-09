@@ -6,7 +6,7 @@ export default async function Admin() {
     const session = await getServerSession(authOptions)
   
   if (!session?.user) {
-    return redirect('/en/host/login');
+    return redirect('/en/host/inscription');
   } else {
     redirect('/en/host/dashboard');
   }
